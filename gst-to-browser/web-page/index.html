@@ -14,7 +14,7 @@
     <style>
       .error { color: red; }
     </style>
-    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <!--script src="https://webrtc.github.io/adapter/adapter-latest.js"></script-->
     <script src="webrtc.js"></script>
     <script>
       window.onload = websocketServerConnect;
@@ -23,12 +23,5 @@
 
   <body>
     <div><video id="stream" autoplay>Your browser doesn't support video</video></div>
-    <div>Status: <span id="status">unknown</span></div>
-    <div>Our id is <b id="peer-id">unknown</b></div>
-    <br/>
-    <div>
-      <div>getUserMedia constraints being used:</div>
-      <div><textarea id="constraints" cols=40 rows=4></textarea></div>
-    </div>
   </body>
 </html>
