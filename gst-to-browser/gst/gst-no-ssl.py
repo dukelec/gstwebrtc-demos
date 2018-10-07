@@ -107,12 +107,21 @@ class WebRTCClient:
         print("ws connected")
 
 
+def check_plugins():
+    needed = ["opus", "vpx", "nice", "webrtc", "dtls", "srtp", "rtp",
+              "rtpmanager", "videotestsrc", "audiotestsrc"]
+    missing = list(filter(lambda p: Gst.Registry.get().find_plugin(p) is None, needed))
+    if len(missing):
+        print('missing gstreamer plugins:', missing)
+        sys.exit(1)
+
 if __name__=='__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--ws-url', help='Signalling server to connect to, eg "ws://127.0.0.1:8443/gst"')
     args = parser.parse_args()
     
     Gst.init(None)
+    check_plugins()
     c = WebRTCClient(args.ws_url)
     asyncio.get_event_loop().run_until_complete(c.connect())
     asyncio.get_event_loop().run_until_complete(c.loop())
